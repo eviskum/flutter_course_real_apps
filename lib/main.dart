@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 // import 'package:intl/intl.dart';
 
 import 'models/transactions.dart';
@@ -21,7 +22,18 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
+        fontFamily: 'Quicksand',
+        textTheme: ThemeData.light()
+            .textTheme
+            .copyWith(headline6: TextStyle(fontFamily: 'OpenSans', fontWeight: FontWeight.bold, fontSize: 18)),
+        appBarTheme: AppBarTheme(
+          titleTextStyle: TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 20,
+            color: Colors.white,
+          ),
+        ),
       ),
       home: MyHomePage(title: 'Flutter Course - Real Apps..'),
     );
@@ -39,8 +51,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
-    Transaction(id: 't1', title: 'Papir', amount: 12.50, date: DateTime.now()),
-    Transaction(id: 't2', title: 'Blyant', amount: 4.75, date: DateTime.now()),
+//    Transaction(id: 't1', title: 'Papir', amount: 12.50, date: DateTime.now()),
+//    Transaction(id: 't2', title: 'Blyant', amount: 4.75, date: DateTime.now()),
   ];
 
   void _addNewTransaction(String title, double amount) {
