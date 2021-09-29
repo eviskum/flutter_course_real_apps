@@ -12,8 +12,8 @@ class TransactionList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 300,
-      child: ListView(
-        children: transactions.map((tx) {
+      child: ListView.builder(
+        itemBuilder: (ctx, idx) {
           return Card(
             child: Row(
               children: <Widget>[
@@ -24,21 +24,22 @@ class TransactionList extends StatelessWidget {
                   ),
                   padding: const EdgeInsets.all(10),
                   child: Text(
-                    '€ ${tx.amount}',
+                    '€ ${transactions[idx].amount.toStringAsFixed(2)}',
                     style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.purple),
                   ),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(tx.title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                    Text(DateFormat.yMMMd().format(tx.date), style: const TextStyle(color: Colors.grey)),
+                    Text(transactions[idx].title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    Text(DateFormat.yMMMd().format(transactions[idx].date), style: const TextStyle(color: Colors.grey)),
                   ],
                 )
               ],
             ),
           );
-        }).toList(),
+        },
+        itemCount: transactions.length,
       ),
     );
   }
