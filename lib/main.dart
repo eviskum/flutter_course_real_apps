@@ -56,8 +56,8 @@ class _MyHomePageState extends State<MyHomePage> {
 //    Transaction(id: 't2', title: 'Blyant', amount: 4.75, date: DateTime.now()),
   ];
 
-  void _addNewTransaction(String title, double amount) {
-    final newTx = Transaction(title: title, amount: amount, id: DateTime.now().toString(), date: DateTime.now());
+  void _addNewTransaction(String title, double amount, DateTime date) {
+    final newTx = Transaction(title: title, amount: amount, id: DateTime.now().toString(), date: date);
 
     setState(() {
       _userTransactions.add(newTx);
@@ -82,6 +82,14 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
+  void _deleteTransaction(String id) {
+    setState(() {
+      _userTransactions.removeWhere((element) {
+        return element.id == id;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Chart(_recentTransactions),
-            TransactionList(_userTransactions),
+            TransactionList(_userTransactions, _deleteTransaction),
           ],
         ),
       ),
